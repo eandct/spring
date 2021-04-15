@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<title>ECサイト</title>
+	
+	<!-- Lesson05 REST：商品削除  -->
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(() => {
+			$('.deleteBtn').on('click',(event) => {
+				event.preventDefault();//デフォルトの動作を止める（submitをクリックで送信させない）
+				let tdList = $(event.target).parent().parent().find('td');
+				//event.targetはイベントの起こった要素を取得（ここではsubmit）
+				//parent()は親要素を取得
+				//find(要素)はその中の要素をすべて配列で取得
+				
+				let id = $(tdList[0]).text();
+				let jsonString = {
+					'id': id,
+					'goodsName': $(tdList[1]).text(),
+					'price': ''
+				};
+				
+				$.ajax({
+					type:'POST',// 使用するHTTPメソッド
+					url:'/ecsite/admin/api/deleteGoods',// 通信先のURL
+					data: JSON.stringify(jsonString),// 送信するデータ
+					contentType: 'application/json',// 応答のデータの種類 
+					scriptCharset: 'utf-8'
+				})
+				
+				//then():Promiseの結果を受けて実行される関数を指定するメソッドです。 
+				//第1引数には履行(fulfilled)、第2引数には拒否(rejected)に変化した時に実行される関数を指定します
+				.then((result) => {
+					console.log(result);
+					/* [`] */
+					alert(`商品[ ${jsonString.goodsName} ] を削除しました。`);
+					$(tdList).parent().remove();
+				},() => {
+					console.error('Error: ajax connection failed.');
+				});
+				
+			});
+		});
+	</script>
+	
+</head>
+<body>
+
+	<header>
+		<h1>My EC Site</h1>
+	</header>
+	
+		<h2></h2>
+		
+	<table id="adminTable">
+		<thead>
+			<tr>
+				<th>ID</th> <th>商品名</th> <th>価格</th> <th>削除</th>
+			</tr>
+		</thead>
+		<tbody>
+ 			<!-- Lesson4 にて追加 -->
+			<tr th:each="item: ${goods}">
+				<td th:text="${item.id}" />
+				<td th:text="${item.goodsName}" />
+				<td th:text="${item.price}" />
+				<td><button type="submit" class="deleteBtn">削除</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr>
+
+	<form name="goodsForm" id="adminPage" method="post"
+		action="/ecsite/admin/goodsMst" th:action="@{/ecsite/admin/goodsMst}">
+		
+		<button type="submit" th:if="${userName != null}">新規追加</button>
+		<input type="hidden" name="userName" th:value="${userName}" />
+		<input type="hidden" name="password" th:value="${password}" />
+	</form>
+</body>
+</html>
