@@ -25,7 +25,10 @@ public class LoginController {
 	
 	
 	@RequestMapping("/login")
-	public String login(@RequestParam("userName") String userName,@RequestParam("password") String password, Model m){
+	public String login(
+			@RequestParam("userName") String userName,
+			@RequestParam("password") String password,
+			Model m){
 		
 		String message ="Welcome!";
 		 
