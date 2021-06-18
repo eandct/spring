@@ -26,21 +26,26 @@
 				$.ajax({
 					type:'POST',// 使用するHTTPメソッド
 					url:'/ecsite/admin/api/deleteGoods',// 通信先のURL
-					data: JSON.stringify(jsonString),// 送信するデータ
+					data: JSON.stringify(jsonString),// 送信するデータ（「キー名: 値」のハッシュ形式）
 					contentType: 'application/json',// 応答のデータの種類 
 					scriptCharset: 'utf-8'
 				})
-				
-				//then():Promiseの結果を受けて実行される関数を指定するメソッドです。 
-				//第1引数には履行(fulfilled)、第2引数には拒否(rejected)に変化した時に実行される関数を指定します
-				.then((result) => {
-					console.log(result);
-					/* [`] */
-					alert(`商品[ ${jsonString.goodsName} ] を削除しました。`);
-					$(tdList).parent().remove();
-				},() => {
-					console.error('Error: ajax connection failed.');
-				});
+				//then():Promise（非同期処理の結果）の結果を受けて実行される関数を指定するメソッドです。 
+				// jQueryのAjaxではPromiseオブジェクトを返す
+				//第1引数には成功時、第2引数には失敗時に実行される関数を指定します
+				.then(
+					// あ成功時
+					(result) => {
+						console.log(result);
+						/* [`] */
+						alert(`商品[ ${jsonString.goodsName} ] を削除しました。`);
+						$(tdList).parent().remove();
+					},
+					// あ失敗時
+					() => {
+						console.error('Error: ajax connection failed.');
+					}
+				);
 				
 			});
 		});

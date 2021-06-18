@@ -32,6 +32,11 @@ public class AdminController {
 		return "adminindex";
 	}
 	
+	// @RequestMappingと@PostMappingの違い
+	// URLへのアクセスは@RequestMappingでマッピング
+	// POST形式のリクエストなら@PostMapping
+	// GET方式のリクエストなら@GetMapping
+	
 	@PostMapping("/welcome")
 	public String welcome(LoginForm form,Model m) {
 		List<User> users = userRepos.findByUserNameAndPassword(form.getUserName(), form.getPassword());
@@ -64,8 +69,12 @@ public class AdminController {
 		Goods goods = new Goods();
 		goods.setGoodsName(goodsForm.getGoodsName());
 		goods.setPrice(goodsForm.getPrice());
+		// a「saveAndFlush」は、文字通り「セーブとフラッシュ」をまとめて行うものです。JpaRepositoryには、
+		// aエンティティの保存として「save」、操作を反映させるためのメソッドとして「flush」というメソッドが用意されています。
+		// saveAndFlushは、引数のエンティティを保存し、それをデータベースに反映させます。
 		goodsRepos.saveAndFlush(goods);
 		
+		// aフォワード：URLは変わりません。パラメータも継承されます。
 		return "forward:/ecsite/admin/welcome";
 	}
 	

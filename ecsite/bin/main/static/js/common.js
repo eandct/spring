@@ -13,13 +13,15 @@
 			datatype:"json",
 			scriptCharset:"utf-8"
 		})
-		.then((result)=>{
+		.then(
+			(result)=>{
 				let user = JSON.parse(result);
 				$("#welcome").text(`-- ようこそ! ${user.fullName}さん`);
 				$("#hiddnUserId").val(user.id);
 				$("input[name=userName]").val('');
 				$("input[name=password]").val('');
-			},()=>{
+			},
+			()=>{
 				console.error("Error:ajax connection failed.");
 			}
 		);
