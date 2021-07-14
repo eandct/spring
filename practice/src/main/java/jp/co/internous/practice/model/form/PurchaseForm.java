@@ -1,11 +1,14 @@
 package jp.co.internous.practice.model.form;
 
-public class PurchaseForm {
+import java.io.Serializable;
+
+public class PurchaseForm implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private long userId;
 	private long goodsId;
 	private long itemCount;
-	private long price;
+	private long total;
 	
 	public long getUserId() {
 		return userId;
@@ -25,12 +28,11 @@ public class PurchaseForm {
 	public void setItemCount(long itemCount) {
 		this.itemCount = itemCount;
 	}
-	public long getPrice() {
-		return price;
+	public long getTotal() {
+		return total;
 	}
-	public void setPrice(long price) {
-		this.price = price;
+	public void setTotal(long total) {
+		this.total = total;
 	}
-	
 	
 }

@@ -11,9 +11,10 @@ import jp.co.internous.practice.model.domain.Goods;
 @Mapper
 public interface GoodsMapper {
 
-	@Select("select * from goods")
+	@Select("SELECT * FROM goods")
 	List<Goods> findAll();
+    //xmlを使用せずに、@Select（ＳＱＬ文）とすることでSELECT文のSQLを定義できる。
 	
-	@Delete("delete from goods where id = #{id}")
+	@Delete("DELETE FROM goods WHERE id = #{id}")
 	boolean deleteById(long id);
 }

@@ -8,6 +8,7 @@ public class User {
 	private String fullName;
 	private int isAdmin;
 	
+	
 	public long getId() {
 		return id;
 	}
@@ -38,7 +39,6 @@ public class User {
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
 	
 	
 }

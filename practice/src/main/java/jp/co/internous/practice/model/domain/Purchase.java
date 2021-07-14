@@ -1,15 +1,14 @@
 package jp.co.internous.practice.model.domain;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public class Purchase {
 	
 	private long id;
 	private long userId;
 	private long goodsId;
-	private long itemcount;
-	private long price;
+	private long itemCount;
+	private long total;
 	private Timestamp createdAt;
 	
 	public long getId() {
@@ -30,17 +29,17 @@ public class Purchase {
 	public void setGoodsId(long goodsId) {
 		this.goodsId = goodsId;
 	}
-	public long getItemcount() {
-		return itemcount;
+	public long getItemCount() {
+		return itemCount;
 	}
-	public void setItemcount(long itemcount) {
-		this.itemcount = itemcount;
+	public void setItemCount(long itemCount) {
+		this.itemCount = itemCount;
 	}
-	public long getPrice() {
-		return price;
+	public long getTotal() {
+		return total;
 	}
-	public void setPrice(long price) {
-		this.price = price;
+	public void setTotal(long total) {
+		this.total = total;
 	}
 	public Timestamp getCreatedAt() {
 		return createdAt;

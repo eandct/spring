@@ -1,7 +1,6 @@
 package jp.co.internous.practice.model.domain;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public class Goods {
 	
@@ -9,7 +8,6 @@ public class Goods {
 	private String goodsName;
 	private long price;
 	private Timestamp updatedAt;
-	private List<Purchase> purcahseList;
 	
 	public long getId() {
 		return id;
@@ -34,12 +32,6 @@ public class Goods {
 	}
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-	public List<Purchase> getPurcahseList() {
-		return purcahseList;
-	}
-	public void setPurcahseList(List<Purchase> purcahseList) {
-		this.purcahseList = purcahseList;
 	}
 	
 	
